@@ -1,0 +1,2310 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thiệp Cưới — Minh Thùy & Trung Dũng</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@200;300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ── Reset & Base ─────────────────────────────────────── */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Lora", serif;
+        background: #faf9f7;
+        color: #1a1a1a;
+        overflow-x: hidden;
+        max-width: 480px;
+        margin: 0 auto;
+      }
+
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* ── Ken Burns — Hero ─────────────────────────────────── */
+      @keyframes kenBurns {
+        0% {
+          transform: scale(1) translate(0, 0);
+        }
+        33% {
+          transform: scale(1.07) translate(-1%, 0.5%);
+        }
+        66% {
+          transform: scale(1.05) translate(1%, -0.5%);
+        }
+        100% {
+          transform: scale(1) translate(0, 0);
+        }
+      }
+      #hero .hero-img img {
+        animation: kenBurns 22s ease-in-out infinite;
+        will-change: transform;
+      }
+
+      /* ── Slow zoom loop — Tagline ──────────────────────────── */
+      @keyframes slowZoom {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.07);
+        }
+      }
+      #tagline .tagline-img img {
+        animation: slowZoom 14s ease-in-out infinite;
+        will-change: transform;
+      }
+
+      /* ── Shimmer sweep — story images ─────────────────────── */
+      .story-block .story-img-wrap {
+        position: relative;
+      }
+      .story-block .story-img-wrap::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          110deg,
+          transparent 35%,
+          rgba(255, 255, 255, 0.14) 50%,
+          transparent 65%
+        );
+        transform: translateX(-120%);
+        transition: transform 1s ease;
+        pointer-events: none;
+      }
+      .story-block:hover .story-img-wrap::after {
+        transform: translateX(120%);
+      }
+      .story-block .story-img-wrap img {
+        transition: transform 9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        will-change: transform;
+      }
+      .story-block:hover .story-img-wrap img {
+        transform: scale(1.09);
+      }
+
+      /* ── Gallery: scale-based reveal + shimmer ─────────────── */
+      .gallery-grid .g-item.reveal {
+        transform: scale(0.88) translateY(24px);
+        opacity: 0;
+        transition:
+          opacity 0.75s ease,
+          transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .gallery-grid .g-item.reveal.visible {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+      }
+      .gallery-grid .g-item:nth-child(2).reveal {
+        transition-delay: 0.1s;
+      }
+      .gallery-grid .g-item:nth-child(3).reveal {
+        transition-delay: 0.2s;
+      }
+      .gallery-grid .g-item:nth-child(4).reveal {
+        transition-delay: 0.3s;
+      }
+      .gallery-grid .g-item:nth-child(5).reveal {
+        transition-delay: 0.4s;
+      }
+      .gallery-grid .g-item {
+        position: relative;
+        overflow: hidden;
+        cursor: zoom-in;
+      }
+      .gallery-grid .g-item::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          115deg,
+          transparent 35%,
+          rgba(255, 255, 255, 0.18) 50%,
+          transparent 65%
+        );
+        transform: translateX(-130%);
+        transition: transform 0.65s ease;
+        pointer-events: none;
+      }
+      .gallery-grid .g-item:hover::after {
+        transform: translateX(130%);
+      }
+      .gallery-grid .g-item img {
+        transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .gallery-grid .g-item:hover img {
+        transform: scale(1.08);
+      }
+
+      /* ── Couple photo: shimmer + float ─────────────────────── */
+      .couple-card .photo-frame {
+        position: relative;
+        overflow: hidden;
+        transition:
+          transform 0.5s ease,
+          box-shadow 0.5s ease;
+      }
+      .couple-card .photo-frame:hover {
+        transform: translateY(-6px) scale(1.02);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      }
+      .couple-card .photo-frame::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          115deg,
+          transparent 35%,
+          rgba(255, 255, 255, 0.2) 50%,
+          transparent 65%
+        );
+        transform: translateX(-130%);
+        transition: transform 0.9s ease;
+        pointer-events: none;
+      }
+      .couple-card .photo-frame:hover::after {
+        transform: translateX(130%);
+      }
+
+      /* ── Forever photo: parallax container ─────────────────── */
+      .forever-photo img {
+        will-change: transform;
+        transition: none !important;
+      }
+
+      /* ── Lightbox ──────────────────────────────────────────── */
+      #lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 9998;
+        background: rgba(0, 0, 0, 0.93);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.4s ease,
+          visibility 0.4s ease;
+        cursor: zoom-out;
+      }
+      #lightbox.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      #lightbox-img {
+        max-width: 92vw;
+        max-height: 90svh;
+        width: auto !important;
+        height: auto !important;
+        object-fit: contain;
+        border-radius: 2px;
+        transform: scale(0.88);
+        transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        cursor: default;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+      }
+      #lightbox.active #lightbox-img {
+        transform: scale(1);
+      }
+      #lightbox-close {
+        position: absolute;
+        top: 16px;
+        right: 20px;
+        color: #fff;
+        font-size: 36px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        line-height: 1;
+        opacity: 0.65;
+        transition:
+          opacity 0.2s,
+          transform 0.2s;
+        font-family: sans-serif;
+      }
+      #lightbox-close:hover {
+        opacity: 1;
+        transform: rotate(90deg);
+      }
+
+      /* ── Music btn: pulse ring when playing ────────────────── */
+      @keyframes musicRing {
+        0% {
+          box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.35);
+        }
+        100% {
+          box-shadow: 0 0 0 14px rgba(255, 255, 255, 0);
+        }
+      }
+      #music-btn.playing {
+        animation: musicRing 1.6s ease-out infinite;
+      }
+
+      /* ── Opening Envelope Overlay ─────────────────────────── */
+      #opening-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: #f5f0eb;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        transition:
+          opacity 0.8s ease,
+          visibility 0.8s ease;
+      }
+      #opening-overlay.hide {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      .envelope-wrap {
+        position: relative;
+        width: 200px;
+        height: 140px;
+        cursor: pointer;
+      }
+      .envelope-body {
+        position: absolute;
+        inset: 0;
+        background: #e8ddd1;
+        border-radius: 4px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        overflow: hidden;
+      }
+      .envelope-flap {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 70px;
+        background: #d9cfc4;
+        clip-path: polygon(0 0, 50% 100%, 100% 0);
+        transform-origin: top center;
+        transition: transform 0.6s ease;
+      }
+      .envelope-wrap:hover .envelope-flap,
+      .envelope-wrap.open .envelope-flap {
+        transform: rotateX(180deg) scaleY(-1);
+      }
+      .envelope-letter {
+        position: absolute;
+        bottom: 10px;
+        left: 20px;
+        right: 20px;
+        height: 90px;
+        background: #fff;
+        border-radius: 2px;
+        display: flex;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+        font-size: 20px;
+        color: #8b6f5e;
+        transition: transform 0.6s ease 0.3s;
+        transform: translateY(0);
+      }
+      .envelope-wrap.open .envelope-letter {
+        transform: translateY(-60px);
+      }
+      .open-btn {
+        font-family: "Inter", sans-serif;
+        font-size: 11px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #8b6f5e;
+        background: transparent;
+        border: 1px solid #8b6f5e;
+        padding: 10px 28px;
+        cursor: pointer;
+        transition:
+          background 0.3s,
+          color 0.3s;
+      }
+      .open-btn:hover {
+        background: #8b6f5e;
+        color: #fff;
+      }
+      .open-hint {
+        font-family: "Lora", serif;
+        font-size: 13px;
+        color: #999;
+        font-style: italic;
+      }
+
+      /* ── Floating Petals ──────────────────────────────────── */
+      #petals-container {
+        position: fixed;
+        inset: 0;
+        z-index: 10;
+        pointer-events: none;
+        overflow: hidden;
+      }
+      .petal {
+        position: absolute;
+        top: -20px;
+        width: 10px;
+        height: 14px;
+        background: radial-gradient(ellipse at 30% 30%, #f4c2c2, #e8a0a0);
+        border-radius: 0 50% 50% 50%;
+        opacity: 0.7;
+        animation: fall linear infinite;
+      }
+      @keyframes fall {
+        0% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 0.7;
+        }
+        100% {
+          transform: translateY(110vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      /* ── Music Toggle ─────────────────────────────────────── */
+      #music-btn {
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        z-index: 1000;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.55);
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.3s;
+      }
+      #music-btn:hover {
+        background: rgba(0, 0, 0, 0.75);
+      }
+      #music-btn svg {
+        width: 18px;
+        height: 18px;
+        fill: #fff;
+      }
+      #music-btn.playing .icon-play {
+        display: none;
+      }
+      #music-btn:not(.playing) .icon-pause {
+        display: none;
+      }
+
+      /* ── Scroll-reveal base ───────────────────────────────── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition:
+          opacity 0.8s ease,
+          transform 0.8s ease;
+      }
+      .reveal.from-left {
+        transform: translateX(-40px);
+      }
+      .reveal.from-right {
+        transform: translateX(40px);
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translate(0, 0);
+      }
+      .reveal-delay-1 {
+        transition-delay: 0.15s;
+      }
+      .reveal-delay-2 {
+        transition-delay: 0.3s;
+      }
+      .reveal-delay-3 {
+        transition-delay: 0.45s;
+      }
+
+      /* ── Section helpers ──────────────────────────────────── */
+      section {
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* ─────────────────────────────────────────────────────── */
+      /* SECTION 1 — HERO                                        */
+      /* ─────────────────────────────────────────────────────── */
+      #hero {
+        height: 100svh;
+        min-height: 600px;
+        position: relative;
+      }
+      #hero .hero-img {
+        position: absolute;
+        inset: 0;
+      }
+      #hero .hero-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+      }
+      #hero .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.08) 0%,
+          rgba(0, 0, 0, 0.35) 100%
+        );
+      }
+      #hero .hero-content {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 40px 28px 36px;
+      }
+      #hero .hero-script {
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+        font-size: 28px;
+        color: #fff;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        letter-spacing: 1px;
+      }
+      #hero .hero-names {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        color: #fff;
+      }
+      #hero .hero-name-block {
+        text-align: center;
+      }
+      #hero .hero-name-block span {
+        display: block;
+        font-family: "Lora", serif;
+        font-style: italic;
+        font-size: 26px;
+        font-weight: 300;
+        letter-spacing: 1px;
+      }
+      #hero .hero-name-block small {
+        display: block;
+        font-family: "Inter", sans-serif;
+        font-size: 10px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        margin-top: 4px;
+        opacity: 0.85;
+      }
+      #hero .hero-divider {
+        color: #fff;
+        font-size: 22px;
+        opacity: 0.7;
+        align-self: flex-end;
+        padding-bottom: 4px;
+      }
+      #hero .hero-date {
+        text-align: center;
+        font-family: "Inter", sans-serif;
+        font-size: 13px;
+        letter-spacing: 4px;
+        color: #fff;
+        margin-top: 16px;
+      }
+      .ticker-bar {
+        background: #fff;
+        padding: 10px 0;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .ticker-inner {
+        display: inline-flex;
+        animation: ticker 20s linear infinite;
+        gap: 0;
+      }
+      .ticker-inner span {
+        font-family: "Inter", sans-serif;
+        font-size: 10px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        padding: 0 40px;
+        color: #555;
+      }
+      @keyframes ticker {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* ─────────────────────────────────────────────────────── */
+      /* SECTION 2 — TAGLINE                                     */
+      /* ─────────────────────────────────────────────────────── */
+      #tagline {
+        min-height: 280px;
+        position: relative;
+      }
+      #tagline .tagline-img {
+        height: 280px;
+      }
+      #tagline .tagline-img img {
+        object-position: center 30%;
+      }
+      #tagline .tagline-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.42);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        padding: 0 56px;
+        text-align: center;
+      }
+      #tagline .tagline-title {
+        font-family: "Lora", serif;
+        font-style: italic;
+        font-size: 22px;
+        color: #fff;
+        letter-spacing: 1px;
+      }
+      #tagline .tagline-subtitle {
+        font-family: "Inter", sans-serif;
+        font-size: 11px;
+        letter-spacing: 2px;
+        color: rgba(255, 255, 255, 0.85);
+        line-height: 1.8;
+      }
+
+      /* ─────────────────────────────────────────────────────── */
+      /* SECTION 3 — OUR LOVE STORY                              */
+      /* ─────────────────────────────────────────────────────── */
+      #love-story {
+        background: #fff;
+        padding: 48px 0 0;
+      }
+      #love-story .section-header {
+        padding: 0 28px 32px;
+        text-align: right;
+      }
+      #love-story .section-header h2 {
+        font-family: "Lora", serif;
+        font-size: 38px;
+        font-weight: 400;
+        line-height: 1.25;
+        color: #c0392b;
+      }
+      #love-story .section-header p {
+        font-family: "Inter", sans-serif;
+        font-size: 10px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #999;
+        margin-top: 6px;
+      }
+      .story-block {
+        position: relative;
+        display: flex;
+      }
+      .story-block .side-text {
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        transform: rotate(180deg);
+        font-family: "Lora", serif;
+        font-style: italic;
+        font-size: 11px;
+        color: #bbb;
+        letter-spacing: 2px;
+        padding: 16px 10px;
+        min-width: 32px;
+        white-space: nowrap;
+      }
+      .story-block .story-img-wrap {
+        flex: 1;
+        /* height: 420px; */
+        overflow: hidden;
+      }
+      .story-block .story-img-wrap img {
+        transition: transform 6s ease;
+      }
+      .story-block:hover .story-img-wrap img {
+        transform: scale(1.04);
+      }
+      .story-block .story-date-badge {
+        position: absolute;
+        right: 14px;
+        bottom: 16px;
+        writing-mode: vertical-rl;
+        font-family: "Inter", sans-serif;
+        font-size: 11px;
+        letter-spacing: 2px;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.45);
+        padding: 8px 5px;
+        border-radius: 2px;
+      }
+      .love-label {
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+        font-size: 42px;
+        color: #c0392b;
+        text-align: right;
+        padding: 0 28px;
+        margin-top: -12px;
+        letter-spacing: 1px;
+      }
+      .love-text-block {
+        padding: 32px 28px;
+      }
+      .love-text-block h3 {
+        font-family: "Inter", sans-serif;
+        font-size: 10px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: #888;
+        margin-bottom: 10px;
+      }
+      .love-text-block p {
+        font-size: 15px;
+        line-height: 1.9;
+        color: #444;
+        font-style: italic;
+      }
+
+      /* ─────────────────────────────────────────────────────── */
+      /* SECTION 4 — COUPLE INFO                                 */
+      /* ─────────────────────────────────────────────────────── */
+      #couple-info {
+        background: #faf9f7;
+        padding: 52px 28px;
+      }
+      #couple-info .xi-symbol {
+        font-size: 56px;
+        color: #c0392b;
+        line-height: 1;
+        margin-bottom: 8px;
+      }
+      #couple-info h2 {
+        font-family: "Lora", serif;
+        font-size: 32px;
+        font-weight: 400;
+      }
+      #couple-info .subtitle {
+        font-family: "Inter", sans-serif;
+        font-size: 10px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #999;
+        margin-top: 6px;
+      }
+      #couple-info .divider {
+        width: 40px;
+        height: 1px;
+        background: #c0392b;
+        margin: 24px 0;
+      }
+      #couple-info .couple-quote {
+        font-style: italic;
+        font-size: 14px;
+        line-height: 2;
+        color: #555;
+      }
+      .couple-cards {
+        display: flex;
+        gap: 20px;
+        margin-top: 36px;
+      }
+      .couple-card {
+        flex: 1;
+        text-align: center;
+      }
+      .couple-card .photo-frame {
+        width: 100%;
+        aspect-ratio: 3/4;
+        overflow: hidden;
+        border-radius: 2px;
+        margin-bottom: 14px;
+      }
+      .couple-card .person-name {
+        font-family: "Lora", serif;
+        font-style: italic;
+        font-size: 20px;
+      }
+      .couple-card .person-role {
+        font-family: "Inter", sans-serif;
+        font-size: 9px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #999;
+        margin-top: 4px;
+      }
+      .couple-card .person-desc {
+        font-size: 12px;
+        color: #777;
+        margin-top: 6px;
+        line-height: 1.6;
+      }
+
+      /* ─────────────────────────────────────────────────────── */
+      /* SECTION 5 — GALLERY                                     */
+      /* ─────────────────────────────────────────────────────── */
+      #gallery {
+        background: #fff;
+        padding: 52px 0 0;
+      }
+      #gallery .section-label {
+        text-align: center;
+        padding: 0 28px 32px;
+      }
+      #gallery .section-label h2 {
+        font-family: "Lora", serif;
+        font-size: 34px;
+        font-weight: 400;
+      }
+      #gallery .section-label p {
+        font-family: "Inter", sans-serif;
+        font-size: 10px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #999;
+        margin-top: 6px;
+      }
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4px;
+      }
+      .gallery-grid .g-item {
+        overflow: hidden;
+      }
+      .gallery-grid .g-item img {
+        transition: transform 0.5s ease;
+      }
+      .gallery-grid .g-item:hover img {
+        transform: scale(1.06);
+      }
+      .gallery-grid .g-item.tall {
+        aspect-ratio: 2/3;
+      }
+      .gallery-grid .g-item.square {
+        aspect-ratio: 1;
+      }
+      .gallery-grid .g-item.wide {
+        grid-column: span 2;
+        aspect-ratio: 3/2;
+      }
+      .gallery-grid .g-item--hidden {
+        display: none;
+      }
+      .gallery-more-wrap {
+        display: flex;
+        justify-content: center;
+        padding: 24px 0 0;
+        margin-bottom: 36px;
+      }
+      .gallery-more-btn {
+        font-family: "Inter", sans-serif;
+        font-size: 10px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #555;
+        background: transparent;
+        border: 1px solid #ccc;
+        padding: 12px 32px;
+        cursor: pointer;
+        border-radius: 2px;
+        transition:
+          background 0.3s,
+          color 0.3s,
+          border-color 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .gallery-more-btn:hover {
+        background: #1a1a1a;
+        color: #fff;
+        border-color: #1a1a1a;
+      }
+      .gallery-more-btn .btn-arrow {
+        display: inline-block;
+        transition: transform 0.3s ease;
+        font-size: 14px;
+      }
+      .gallery-more-btn.expanded .btn-arrow {
+        transform: rotate(180deg);
+      }
+      .gallery-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 16px;
+        font-family: "Inter", sans-serif;
+        font-size: 10px;
+        letter-spacing: 2px;
+        color: #aaa;
+      }
+
+      /* ─────────────────────────────────────────────────────── */
+      /* SECTION 6 — FOREVER                                     */
+      /* ─────────────────────────────────────────────────────── */
+      #forever {
+        padding: 0;
+      }
+      .forever-photo {
+        position: relative;
+        /* height: 500px; */
+        width: 100%;
+        aspect-ratio: 2/3;
+        overflow: hidden;
+      }
+      .forever-photo img {
+        object-position: center 20%;
+      }
+      .forever-vtext {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        writing-mode: vertical-lr;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px 10px;
+        background: rgba(255, 255, 255, 0.92);
+        font-family: "Inter", sans-serif;
+        font-size: 10px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: #333;
+      }
+      .forever-vtext span {
+        display: block;
+      }
+      .forever-poem {
+        padding: 40px 32px;
+        text-align: center;
+        background: #faf9f7;
+      }
+      .forever-poem p {
+        font-size: 14px;
+        font-style: italic;
+        line-height: 2.1;
+        color: #555;
+      }
+
+      /* ─────────────────────────────────────────────────────── */
+      /* SECTION 7 — WEDDING DETAILS                             */
+      /* ─────────────────────────────────────────────────────── */
+      #wedding-details {
+        background: #fff;
+        padding: 52px 28px;
+        text-align: center;
+      }
+      #wedding-details .ornament {
+        font-size: 32px;
+        color: #c0392b;
+        line-height: 1;
+      }
+      #wedding-details h2 {
+        font-family: "Lora", serif;
+        font-size: 13px;
+        letter-spacing: 6px;
+        text-transform: uppercase;
+        font-weight: 400;
+        margin-top: 8px;
+        color: #555;
+      }
+      #wedding-details h3 {
+        font-family: "Lora", serif;
+        font-size: 20px;
+        letter-spacing: 8px;
+        text-transform: uppercase;
+        font-weight: 400;
+        margin-top: 2px;
+      }
+      .detail-card {
+        border: 1px solid #e8e2db;
+        border-radius: 4px;
+        padding: 28px 20px;
+        margin-top: 28px;
+        text-align: left;
+      }
+      .detail-card + .detail-card {
+        margin-top: 16px;
+      }
+      .detail-card .d-label {
+        font-family: "Inter", sans-serif;
+        font-size: 9px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #c0392b;
+        margin-bottom: 8px;
+      }
+      .detail-card .d-name {
+        font-family: "Lora", serif;
+        font-size: 20px;
+        font-weight: 400;
+        margin-bottom: 4px;
+      }
+      .detail-card .d-info {
+        font-family: "Inter", sans-serif;
+        font-size: 11px;
+        color: #777;
+        line-height: 1.8;
+      }
+      #wedding-details .countdown-wrap {
+        margin-top: 36px;
+      }
+      #wedding-details .countdown-label {
+        font-family: "Inter", sans-serif;
+        font-size: 9px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #999;
+        margin-bottom: 16px;
+      }
+      .countdown {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+      }
+      .countdown-unit {
+        text-align: center;
+        min-width: 60px;
+      }
+      .countdown-unit .num {
+        font-family: "Lora", serif;
+        font-size: 42px;
+        font-weight: 300;
+        line-height: 1;
+        color: #1a1a1a;
+      }
+      .countdown-unit .lbl {
+        font-family: "Inter", sans-serif;
+        font-size: 9px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #999;
+        margin-top: 4px;
+      }
+      .countdown-sep {
+        font-size: 32px;
+        color: #ccc;
+        line-height: 1.3;
+        align-self: flex-start;
+        padding-top: 4px;
+      }
+
+      /* ─────────────────────────────────────────────────────── */
+      /* SECTION 8 — MAP                                         */
+      /* ─────────────────────────────────────────────────────── */
+      #map-section {
+        background: #faf9f7;
+      }
+      #map-section .map-header {
+        padding: 40px 28px 24px;
+        text-align: center;
+      }
+      #map-section .map-header h2 {
+        font-family: "Lora", serif;
+        font-size: 28px;
+        font-weight: 400;
+      }
+      #map-section .map-header p {
+        font-family: "Inter", sans-serif;
+        font-size: 11px;
+        color: #888;
+        margin-top: 6px;
+        line-height: 1.7;
+      }
+      #map-section iframe {
+        width: 100%;
+        height: 260px;
+        border: 0;
+        display: block;
+      }
+      #map-section .map-footer {
+        padding: 20px 28px;
+        text-align: center;
+        font-family: "Inter", sans-serif;
+        font-size: 10px;
+        letter-spacing: 1px;
+        color: #888;
+      }
+      #map-section .map-footer a {
+        color: #c0392b;
+        text-decoration: none;
+      }
+
+      /* ─────────────────────────────────────────────────────── */
+      /* SECTION 9 — RSVP                                        */
+      /* ─────────────────────────────────────────────────────── */
+      #rsvp {
+        background: #fff;
+        padding: 52px 28px 48px;
+      }
+      #rsvp .rsvp-header {
+        text-align: center;
+        margin-bottom: 36px;
+      }
+      #rsvp .rsvp-header h2 {
+        font-family: "Lora", serif;
+        font-size: 34px;
+        font-weight: 400;
+      }
+      #rsvp .rsvp-header p {
+        font-size: 14px;
+        color: #777;
+        font-style: italic;
+        margin-top: 6px;
+        line-height: 1.7;
+      }
+      .rsvp-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .form-field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .form-field label {
+        font-family: "Inter", sans-serif;
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #555;
+      }
+      .form-field input[type="text"],
+      .form-field input[type="number"],
+      .form-field textarea {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid #ddd;
+        border-radius: 2px;
+        font-family: "Lora", serif;
+        font-size: 16px;
+        background: #faf9f7;
+        outline: none;
+        transition: border-color 0.3s;
+      }
+      .form-field input:focus,
+      .form-field textarea:focus {
+        border-color: #c0392b;
+      }
+      .form-field textarea {
+        min-height: 80px;
+        resize: vertical;
+      }
+      .radio-group {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .radio-option {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        cursor: pointer;
+      }
+      .radio-option input[type="radio"] {
+        display: none;
+      }
+      .radio-custom {
+        width: 20px;
+        height: 20px;
+        border: 2px solid #ddd;
+        border-radius: 50%;
+        position: relative;
+        flex-shrink: 0;
+        transition: border-color 0.3s;
+      }
+      .radio-custom::after {
+        content: "";
+        position: absolute;
+        inset: 3px;
+        background: #c0392b;
+        border-radius: 50%;
+        transform: scale(0);
+        transition: transform 0.2s;
+      }
+      .radio-option input:checked ~ .radio-custom {
+        border-color: #c0392b;
+      }
+      .radio-option input:checked ~ .radio-custom::after {
+        transform: scale(1);
+      }
+      .radio-option .radio-label {
+        /* font-family: "Lora", serif; */
+        text-transform: capitalize;
+        font-size: 12px;
+        color: #333;
+        letter-spacing: 0;
+      }
+      .submit-btn {
+        width: 100%;
+        padding: 16px;
+        background: #1a1a1a;
+        color: #fff;
+        border: none;
+        font-family: "Inter", sans-serif;
+        font-size: 11px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        cursor: pointer;
+        border-radius: 2px;
+        transition: background 0.3s;
+        margin-top: 8px;
+      }
+      .submit-btn:hover {
+        background: #c0392b;
+      }
+      .rsvp-success {
+        display: none;
+        text-align: center;
+        padding: 40px 20px;
+      }
+      .rsvp-success.visible {
+        display: block;
+      }
+      .rsvp-success .success-icon {
+        font-size: 48px;
+        margin-bottom: 12px;
+      }
+      .rsvp-success h3 {
+        font-family: "Lora", serif;
+        font-size: 26px;
+        font-style: italic;
+      }
+      .rsvp-success p {
+        font-size: 14px;
+        color: #777;
+        margin-top: 8px;
+        line-height: 1.7;
+      }
+
+      /* ─────────────────────────────────────────────────────── */
+      /* SECTION 10 — GIFT / LÌ XÌ                               */
+      /* ─────────────────────────────────────────────────────── */
+      #gift-section {
+        background: #fff;
+        padding: 0px 28px 60px;
+        text-align: center;
+      }
+      #gift-section .gift-emoji {
+        font-size: 18px;
+        margin-bottom: 8px;
+      }
+      #gift-section .gift-eyebrow {
+        font-family: "Inter", sans-serif;
+        font-size: 11px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: #999;
+        margin-bottom: 10px;
+      }
+      #gift-section .gift-title {
+        font-family: "Lora", serif;
+        font-size: 32px;
+        font-weight: 700;
+        color: #1a1a1a;
+        line-height: 1.2;
+        margin-bottom: 20px;
+      }
+      #gift-section .gift-desc {
+        font-size: 14px;
+        line-height: 1.9;
+        color: #555;
+        font-style: italic;
+        margin-bottom: 32px;
+      }
+      .gift-box-btn {
+        background: none;
+        border: 2px solid #e0b4b4;
+        border-radius: 16px;
+        padding: 32px 20px;
+        cursor: pointer;
+        width: 100%;
+        max-width: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          border-color 0.3s,
+          transform 0.35s,
+          box-shadow 0.35s;
+        position: relative;
+        overflow: hidden;
+      }
+      .gift-box-btn:hover {
+        border-color: #c0392b;
+        transform: translateY(-4px);
+        box-shadow: 0 16px 40px rgba(192, 57, 43, 0.12);
+      }
+      .gift-box-btn img {
+        width: 160px;
+        height: 160px;
+        object-fit: contain;
+        transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .gift-box-btn:hover img {
+        transform: scale(1.08) translateY(-4px);
+      }
+      @keyframes giftBounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-10px);
+        }
+        60% {
+          transform: translateY(-6px);
+        }
+      }
+      .gift-box-btn img {
+        animation: giftBounce 3s ease-in-out infinite;
+      }
+      .gift-box-btn:hover img {
+        animation: none;
+        transform: scale(1.1) translateY(-6px);
+      }
+      .gift-tap-hint {
+        font-family: "Inter", sans-serif;
+        font-size: 10px;
+        letter-spacing: 2px;
+        color: #bbb;
+        margin-top: 14px;
+        text-transform: uppercase;
+      }
+
+      /* ── Gift modal ─────────────────────────────────────── */
+      #gift-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 9997;
+        background: rgba(0, 0, 0, 0.55);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.4s ease,
+          visibility 0.4s ease;
+      }
+      #gift-modal.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .gift-modal-card {
+        background: #fff;
+        border-radius: 20px;
+        padding: 36px 28px 32px;
+        width: 100%;
+        max-width: 340px;
+        text-align: center;
+        position: relative;
+        transform: translateY(24px) scale(0.95);
+        transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.2);
+      }
+      #gift-modal.active .gift-modal-card {
+        transform: translateY(0) scale(1);
+      }
+      .gift-modal-close {
+        position: absolute;
+        top: 14px;
+        right: 18px;
+        background: none;
+        border: none;
+        font-size: 26px;
+        color: #bbb;
+        cursor: pointer;
+        line-height: 1;
+        transition:
+          color 0.2s,
+          transform 0.2s;
+        font-family: sans-serif;
+      }
+      .gift-modal-close:hover {
+        color: #1a1a1a;
+        transform: rotate(90deg);
+      }
+      .gift-modal-title {
+        font-family: "Playfair Display", serif;
+        font-size: 28px;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 18px;
+      }
+      .gift-modal-name {
+        font-family: "Inter", sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: #1a1a1a;
+        margin-bottom: 4px;
+        text-transform: uppercase;
+      }
+      .gift-modal-account {
+        font-family: "Lora", serif;
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 20px;
+      }
+      .gift-modal-qr {
+        width: 100%;
+        border-radius: 10px;
+        border: 1px solid #f0e8e8;
+        object-fit: contain;
+        max-height: 280px;
+      }
+
+      /* ─────────────────────────────────────────────────────── */
+      /* SECTION 11 — THANK YOU                                  */
+      /* ─────────────────────────────────────────────────────── */
+      #thankyou {
+        background: #faf9f7;
+        padding: 60px 28px 80px;
+        text-align: center;
+        position: relative;
+      }
+      #thankyou .ty-illustration {
+        width: 140px;
+        margin: 0 auto 24px;
+        opacity: 0.85;
+      }
+      #thankyou .ty-illustration img {
+        object-fit: contain;
+      }
+      #thankyou .ty-script {
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+        font-size: 46px;
+        color: #1a1a1a;
+        line-height: 1.1;
+        letter-spacing: 0;
+      }
+      #thankyou .ty-sub {
+        /* font-family: "Inter", sans-serif; */
+        font-size: 12px;
+        letter-spacing: 0;
+        /* text-transform: uppercase; */
+        color: #999;
+        margin-top: 12px;
+      }
+      #thankyou .ty-names {
+        font-family: "Lora", serif;
+        font-style: italic;
+        font-size: 22px;
+        margin-top: 20px;
+        color: #333;
+      }
+      #thankyou .ty-date {
+        font-family: "Inter", sans-serif;
+        font-size: 11px;
+        letter-spacing: 4px;
+        color: #bbb;
+        margin-top: 10px;
+      }
+
+      /* ── Footer ───────────────────────────────────────────── */
+      footer {
+        background: #1a1a1a;
+        text-align: center;
+        padding: 20px;
+        font-family: "Inter", sans-serif;
+        font-size: 12px;
+        letter-spacing: 0;
+        line-height: 1.5;
+        color: #555;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ── Opening Overlay ─────────────────────────────────── -->
+    <div id="opening-overlay">
+      <div class="envelope-wrap" id="envelope">
+        <div class="envelope-body">
+          <div class="envelope-flap"></div>
+          <div class="envelope-letter">
+            Minh Thùy<br />&amp;<br />Trung Dũng
+          </div>
+        </div>
+      </div>
+      <p class="open-hint">Trân trọng kính mời bạn</p>
+      <button class="open-btn" id="open-invitation-btn">Mở Thiệp Cưới</button>
+    </div>
+
+    <!-- ── Floating Petals ─────────────────────────────────── -->
+    <div id="petals-container"></div>
+
+    <!-- ── Music Button ────────────────────────────────────── -->
+    <button id="music-btn" aria-label="Bật/tắt nhạc" title="Bật/tắt nhạc nền">
+      <!-- Play icon -->
+      <svg class="icon-play" viewBox="0 0 24 24">
+        <path d="M8 5v14l11-7z" />
+      </svg>
+      <!-- Pause icon -->
+      <svg class="icon-pause" viewBox="0 0 24 24">
+        <path d="M6 19h4V5H6zm8-14v14h4V5z" />
+      </svg>
+    </button>
+
+    <!-- Background audio — replace src with your music file -->
+    <audio id="bg-music" loop preload="auto">
+      <source src="music/background.mp3" type="audio/mpeg" />
+    </audio>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SECTION 1 — HERO                                       -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section id="hero">
+      <div class="hero-img">
+        <!-- Replace with your hero photo -->
+        <img src="images/hero.jpg" alt="Minh Thùy & Trung Dũng" />
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="hero-script reveal"></div>
+        <div>
+          <div class="hero-names reveal reveal-delay-1">
+            <div class="hero-name-block">
+              <span>Minh Thùy</span>
+              <small>Cô Dâu</small>
+            </div>
+            <div class="hero-divider">&amp;</div>
+            <div class="hero-name-block">
+              <span>Trung Dũng</span>
+              <small>Chú Rể</small>
+            </div>
+          </div>
+          <div class="hero-date reveal reveal-delay-2">20 · 06 · 2026</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ticker bar -->
+    <div class="ticker-bar">
+      <div class="ticker-inner">
+        <span>Thiệp Cưới</span><span>·</span>
+        <span>Minh Thùy &amp; Trung Dũng</span><span>·</span>
+        <span>20 Tháng 6, 2026</span><span>·</span>
+        <span>Lưu Ngày Trọng Đại</span><span>·</span> <span>Thiệp Cưới</span
+        ><span>·</span> <span>Minh Thùy &amp; Trung Dũng</span><span>·</span>
+        <span>20 Tháng 6, 2026</span><span>·</span>
+        <span>Lưu Ngày Trọng Đại</span><span>·</span>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SECTION 2 — TAGLINE                                    -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section id="tagline">
+      <div class="tagline-img">
+        <!-- Replace with your second photo -->
+        <img src="images/horizontal-3.jpg" alt="Couple" />
+      </div>
+      <div class="tagline-overlay">
+        <p class="tagline-title reveal">Đúng người - Đúng lúc</p>
+        <p class="tagline-subtitle reveal reveal-delay-1">
+          Kính gửi gia đình và bạn bè thân mến,<br />
+          Cảm ơn bạn đã đồng hành <br />trong ngày trọng đại của chúng tôi,<br />
+          Yêu thương và trân trọng<br />sự hiện diện của bạn.
+        </p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SECTION 3 — OUR LOVE STORY                             -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section id="love-story">
+      <div class="section-header">
+        <h2 class="reveal">CHUYỆN<br />TÌNH YÊU</h2>
+        <p class="reveal reveal-delay-1">Yêu nhau</p>
+      </div>
+
+      <!-- Story block 1 -->
+      <div class="story-block">
+        <div class="side-text">
+          One day we gonna sit together and say: It was hard, but we made it.
+        </div>
+        <div class="story-img-wrap reveal">
+          <!-- Replace with your photo -->
+          <img src="images/vertical-35.jpg" alt="Our Story" />
+          <div class="story-date-badge">28 · 11 · 2024</div>
+        </div>
+      </div>
+
+      <!-- <div class="love-label reveal">Ngọt Ngào</div> -->
+
+      <div class="love-text-block">
+        <h3 class="reveal">Yêu nhau</h3>
+        <p class="reveal reveal-delay-1">
+          Đám cưới không chỉ là một thông báo trịnh trọng, mà còn là lời mời gọi
+          những trái tim yêu thương về chung một mái nhà. Đó là những hành trình
+          dài để được hiện diện bên nhau. Đó là tình yêu và sự ủng hộ vô điều
+          kiện từ những người thân yêu nhất.
+        </p>
+      </div>
+
+      <!-- Story block 2 -->
+      <div class="story-block">
+        <div class="side-text reveal from-left">
+          Love is not finding someone to live with. It is finding someone you
+          cant live without.
+        </div>
+        <div class="story-img-wrap">
+          <!-- Replace with your photo -->
+          <img src="images/vertical-13.jpg" alt="Love Story" />
+          <div class="story-date-badge">2026</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SECTION 4 — COUPLE INFO                                -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section id="couple-info">
+      <div class="xi-symbol reveal">囍</div>
+      <h2 class="reveal reveal-delay-1">CHÚNG TÔI<br />THÀNH HÔN</h2>
+      <p class="subtitle reveal reveal-delay-2">
+        Yêu một người, trao trọn một đời
+      </p>
+      <div class="divider"></div>
+      <p class="couple-quote reveal">
+        Khoảnh khắc đó tôi đã biết<br />
+        âm thanh của cuộc sống là tiếng của<br />
+        một người nói yêu một người...
+      </p>
+
+      <div class="couple-cards">
+        <div class="couple-card">
+          <div class="photo-frame reveal">
+            <!-- Replace with bride photo -->
+            <img src="images/bride-portrait.JPG" alt="Minh Thùy — Bride" />
+          </div>
+          <div class="person-name reveal">Minh Thùy</div>
+          <div class="person-role reveal reveal-delay-1">Cô Dâu</div>
+          <!-- <div class="person-desc reveal reveal-delay-2">
+            Ba Quách Ngọc Thơ<br />Mẹ Võ Hồng Yến
+          </div> -->
+        </div>
+        <div class="couple-card">
+          <div class="photo-frame reveal">
+            <!-- Replace with groom photo -->
+            <img src="images/groom-portrait.JPG" alt="Trung Dũng — Groom" />
+          </div>
+          <div class="person-name reveal">Trung Dũng</div>
+          <div class="person-role reveal reveal-delay-1">Chú Rể</div>
+          <!-- <div class="person-desc reveal reveal-delay-2">
+            Ba Nguyễn Hồng Thắng<br />Mẹ Lương Thị Liên
+          </div> -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SECTION 5 — GALLERY                                    -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section id="gallery">
+      <div class="section-label">
+        <h2 class="reveal">Khoảnh Khắc</h2>
+        <p class="reveal reveal-delay-1">Bộ Sưu Tập Ảnh</p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="g-item tall reveal">
+          <img src="images/vertical-25.jpg" alt="Gallery 1" />
+        </div>
+        <div class="g-item tall reveal reveal-delay-1">
+          <img src="images/vertical-4.jpg" alt="Gallery 2" />
+        </div>
+        <div class="g-item wide reveal">
+          <img src="images/horizontal-1.jpg" alt="Gallery 3" />
+        </div>
+        <!-- Hidden initially — revealed by Show More -->
+        <div class="g-item tall reveal reveal-delay-1">
+          <img src="images/vertical-10.jpg" alt="Gallery 4" />
+        </div>
+        <div class="g-item tall reveal reveal-delay-1">
+          <img src="images/vertical-30.jpg" alt="Gallery 5" />
+        </div>
+        <div class="g-item tall reveal g-item--hidden">
+          <img src="images/vertical-2.jpg" alt="Gallery 6" />
+        </div>
+        <div class="g-item tall reveal reveal-delay-1 g-item--hidden">
+          <img src="images/vertical-40.jpg" alt="Gallery 7" />
+        </div>
+        <div class="g-item wide reveal g-item--hidden">
+          <img src="images/horizontal-2.jpg" alt="Gallery 8" />
+        </div>
+        <div class="g-item tall reveal g-item--hidden">
+          <img src="images/vertical-8.jpg" alt="Gallery 9" />
+        </div>
+        <div class="g-item tall reveal reveal-delay-1 g-item--hidden">
+          <img src="images/vertical-9.jpg" alt="Gallery 10" />
+        </div>
+        <div class="g-item wide reveal g-item--hidden">
+          <img src="images/horizontal-4.jpg" alt="Gallery 11" />
+        </div>
+        <div class="g-item tall reveal g-item--hidden">
+          <img src="images/vertical-39.jpg" alt="Gallery 12" />
+        </div>
+        <div class="g-item tall reveal reveal-delay-1 g-item--hidden">
+          <img src="images/vertical-12.jpg" alt="Gallery 13" />
+        </div>
+        <div class="g-item wide reveal reveal-delay-1 g-item--hidden">
+          <img src="images/horizontal-7.JPG" alt="Gallery 14" />
+        </div>
+        <div class="g-item tall reveal reveal-delay-1 g-item--hidden">
+          <img src="images/vertical-36.JPG" alt="Gallery 15" />
+        </div>
+        <div class="g-item tall reveal reveal-delay-1 g-item--hidden">
+          <img src="images/vertical-37.JPG" alt="Gallery 16" />
+        </div>
+      </div>
+
+      <div class="gallery-more-wrap">
+        <button
+          class="gallery-more-btn"
+          id="gallery-more-btn"
+          aria-expanded="false"
+        >
+          <span class="btn-text">Xem thêm</span>
+          <span class="btn-arrow">↓</span>
+        </button>
+      </div>
+
+      <div class="gallery-meta">
+        <span>28 · 11</span>
+        <span>2024</span>
+        <span>YÊU</span>
+        <span>NHAU</span>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SECTION 6 — FOREVER                                    -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section id="forever">
+      <div class="forever-photo reveal">
+        <!-- Replace with your photo -->
+        <img src="images/vertical-b&w.jpg" alt="Forever" />
+        <div class="forever-vtext">
+          <span>MÃI MÃI BÊN NHAU</span>
+        </div>
+      </div>
+      <div class="forever-poem">
+        <p class="reveal">
+          Mây tan khói tỏa giữa bầu trời,<br />
+          yêu em và cả thế gian đều biết.<br />
+          Vượt non ngàn sông dài bất tận,<br />
+          hoa nở rộ khắp nẻo đường xuân.<br />
+          Giữa muôn vàn người trong thiên hạ,<br />
+          chỉ thấy em — người mà anh trân quý nhất.
+        </p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SECTION 7 — WEDDING DETAILS + COUNTDOWN                -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section id="wedding-details">
+      <div class="ornament reveal">✦</div>
+      <h2 class="reveal reveal-delay-1">THIỆP</h2>
+      <h3 class="reveal reveal-delay-2">CƯỚI</h3>
+
+      <!-- Ceremony -->
+      <div class="detail-card reveal">
+        <div class="d-label">Lễ Gia Tiên</div>
+        <div class="d-name">Tư Gia Nhà Gái</div>
+        <div class="d-info">
+          20 Tháng 6, 2026 · 08:00 sáng<br />
+          Gò Công<br />
+          Tỉnh Tiền Giang
+        </div>
+      </div>
+
+      <!-- Reception -->
+      <div class="detail-card reveal reveal-delay-1">
+        <div class="d-label">Tiệc Cưới</div>
+        <div class="d-name">Nhà Hàng Tiệc Cưới Hạnh Phúc</div>
+        <div class="d-info">
+          20 Tháng 6, 2026 · 11:00 sáng<br />
+          164 Trần Công Tường<br />
+          Gò Công, Tiền Giang
+        </div>
+      </div>
+
+      <!-- Countdown -->
+      <div class="countdown-wrap">
+        <div class="countdown-label reveal">Đếm ngược đến ngày trọng đại</div>
+        <div class="countdown reveal reveal-delay-1">
+          <div class="countdown-unit">
+            <div class="num" id="cd-days">--</div>
+            <div class="lbl">Ngày</div>
+          </div>
+          <div class="countdown-sep">:</div>
+          <div class="countdown-unit">
+            <div class="num" id="cd-hours">--</div>
+            <div class="lbl">Giờ</div>
+          </div>
+          <div class="countdown-sep">:</div>
+          <div class="countdown-unit">
+            <div class="num" id="cd-mins">--</div>
+            <div class="lbl">Phút</div>
+          </div>
+          <div class="countdown-sep">:</div>
+          <div class="countdown-unit">
+            <div class="num" id="cd-secs">--</div>
+            <div class="lbl">Giây</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SECTION 8 — MAP                                        -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section id="map-section">
+      <div class="map-header">
+        <h2 class="reveal">Địa Điểm Tổ Chức</h2>
+        <p class="reveal reveal-delay-1">
+          164 Trần Công Tường, Gò Công, Đồng Tháp<br />Hân hạnh được đón tiếp
+          quý khách
+        </p>
+      </div>
+      <!--
+      Replace the src with your Google Maps embed URL.
+      Go to maps.google.com → share → embed a map → copy iframe src.
+    -->
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3924.854147872234!2d106.679401!3d10.353544999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317551afe9b153c1%3A0xe45c2b81e75e8356!2zTmjDoCBIw6BuZyBUaeG7h2MgQ8aw4bubaSBI4bqhbmggUGjDumM!5e0!3m2!1svi!2s!4v1778514570635!5m2!1svi!2s"
+        width="600"
+        height="450"
+        style="border: 0"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Wedding venue map"
+      ></iframe>
+      <div class="map-footer">
+        <a href="https://maps.google.com" target="_blank" rel="noopener"
+          >Xem trên Google Maps ↗</a
+        >
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SECTION 9 — RSVP                                       -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section id="rsvp">
+      <div class="rsvp-header">
+        <h2 class="reveal">XÁC NHẬN<br />THAM DỰ</h2>
+        <p class="reveal reveal-delay-1">
+          Vui lòng xác nhận trước ngày 1 tháng 6, 2026<br />
+          để chúng tôi chuẩn bị chu đáo hơn.
+        </p>
+      </div>
+
+      <form class="rsvp-form reveal" id="rsvp-form" novalidate>
+        <div class="form-field">
+          <label for="guest-name">Họ và Tên</label>
+          <input
+            type="text"
+            id="guest-name"
+            name="name"
+            placeholder="Họ và tên của bạn"
+            required
+          />
+        </div>
+
+        <div class="form-field">
+          <label for="guest-phone"
+            >Số Điện Thoại
+            <span style="color: #bbb; font-size: 10px"
+              >(không bắt buộc)</span
+            ></label
+          >
+          <input
+            type="text"
+            id="guest-phone"
+            name="phone"
+            placeholder="Số điện thoại của bạn"
+          />
+        </div>
+
+        <div class="form-field">
+          <label for="guest-count">Số Người Tham Dự</label>
+          <input
+            type="number"
+            id="guest-count"
+            name="guests"
+            placeholder="1"
+            min="1"
+            max="10"
+            value="1"
+          />
+        </div>
+
+        <div class="form-field">
+          <label>Bạn có tham dự không?</label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="attending" value="yes" checked />
+              <span class="radio-custom"></span>
+              <span class="radio-label">Vâng, tôi sẽ đến tham dự</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="attending" value="no" />
+              <span class="radio-custom"></span>
+              <span class="radio-label">Rất tiếc, tôi không thể tham dự</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="guest-message"
+            >Lời Chúc
+            <span style="color: #bbb; font-size: 10px"
+              >(không bắt buộc)</span
+            ></label
+          >
+          <textarea
+            id="guest-message"
+            name="message"
+            placeholder="Gửi lời chúc mừng đến cô dâu chú rể…"
+          ></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Gửi Xác Nhận</button>
+      </form>
+
+      <!-- Success state -->
+      <div class="rsvp-success" id="rsvp-success">
+        <div class="success-icon">💌</div>
+        <h3>Cảm ơn bạn, <span id="success-name"></span>!</h3>
+        <p>
+          Chúng tôi đã nhận được phản hồi của bạn.<br />Rất mong được gặp bạn
+          trong ngày vui!
+        </p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SECTION 10 — GIFT / LÌ XÌ                              -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section id="gift-section">
+      <p class="gift-emoji">🤵👰</p>
+      <p class="gift-eyebrow reveal">Gửi Quà Mừng</p>
+      <h2 class="gift-title reveal reveal-delay-1">ĐẾN CÔ DÂU<br />CHÚ RỂ</h2>
+      <p class="gift-desc reveal reveal-delay-2">
+        Mình rất muốn được chụp chung với bạn<br />những tấm hình kỷ niệm<br />
+        vì vậy hãy đến sớm hơn một chút bạn yêu nhé!<br />
+        Đám cưới của chúng mình sẽ trọn vẹn hơn<br />khi có thêm lời chúc phúc
+        và sự hiện diện của các bạn.
+      </p>
+      <div style="display: flex; flex-direction: column; align-items: center">
+        <button
+          class="gift-box-btn reveal reveal-delay-3"
+          id="gift-box-btn"
+          aria-label="Gửi lì xì mừng cưới"
+        >
+          <!-- gift box emoji as fallback; swap for a PNG if you have one -->
+          <img
+            src="images/gift-box.png"
+            alt="Hộp quà"
+            onerror="
+              this.style.fontSize = '96px';
+              this.style.lineHeight = '1';
+              this.outerHTML =
+                '<span style=\'font-size:96px;line-height:1;\'>🎁</span>';
+            "
+          />
+        </button>
+        <p class="gift-tap-hint reveal">Nhấn vào hộp quà để gửi lì xì</p>
+      </div>
+    </section>
+
+    <!-- Gift Modal -->
+    <div
+      id="gift-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Lì Xì Mừng Cưới"
+    >
+      <div class="gift-modal-card">
+        <button
+          class="gift-modal-close"
+          id="gift-modal-close"
+          aria-label="Đóng"
+        >
+          &times;
+        </button>
+        <div class="gift-modal-title">Lì Xì Mừng Cưới</div>
+        <div class="gift-modal-name">QUÁCH VÕ MINH THÙY</div>
+        <div class="gift-modal-account">0671004106642</div>
+        <img
+          class="gift-modal-qr"
+          src="images/bride-QR.jpg"
+          alt="QR chuyển khoản"
+        />
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SECTION 11 — THANK YOU                                 -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section id="thankyou">
+      <div class="ty-illustration reveal">
+        <!-- Optional illustration; remove or replace with an SVG / PNG -->
+        <img
+          src="images/square.jpg"
+          style="
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto;
+          "
+          alt="Cảm ơn"
+        />
+      </div>
+      <div class="ty-script reveal">Cảm ơn bạn</div>
+      <div class="ty-sub reveal reveal-delay-1">
+        đã là một phần trong câu chuyện của chúng tôi
+      </div>
+      <div class="ty-names reveal reveal-delay-2">
+        Minh Thùy &amp; Trung Dũng
+      </div>
+      <div class="ty-date reveal reveal-delay-3">20 Tháng 6, 2026</div>
+    </section>
+
+    <footer>
+      Minh Thùy &amp; Trung Dũng<br />
+      20 Tháng 6, 2026
+    </footer>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- JAVASCRIPT                                              -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <script>
+      /* ── 1. Opening overlay ──────────────────────────────── */
+      const overlay = document.getElementById("opening-overlay");
+      const envelope = document.getElementById("envelope");
+      const openBtn = document.getElementById("open-invitation-btn");
+
+      // Lock scroll on first visit
+      document.body.style.overflow = "hidden";
+
+      function openInvitation() {
+        envelope.classList.add("open");
+        setTimeout(() => {
+          overlay.classList.add("hide");
+          document.body.style.overflow = "";
+          // Auto-play music on user gesture
+          if (audio.querySelector("source") || audio.src) {
+            audio.volume = 0;
+            audio
+              .play()
+              .then(() => {
+                musicBtn.classList.add("playing");
+                // Fade in volume
+                let vol = 0;
+                const fadeIn = setInterval(() => {
+                  vol = Math.min(vol + 0.02, 0.3);
+                  audio.volume = vol;
+                  if (vol >= 0.3) clearInterval(fadeIn);
+                }, 100);
+              })
+              .catch(() => {});
+          }
+        }, 800);
+      }
+      openBtn.addEventListener("click", openInvitation);
+      envelope.addEventListener("click", openInvitation);
+
+      /* ── 2. Floating petals ──────────────────────────────── */
+      const petalContainer = document.getElementById("petals-container");
+      function spawnPetal() {
+        const p = document.createElement("div");
+        p.className = "petal";
+        const size = 8 + Math.random() * 8;
+        const left = Math.random() * 100;
+        const dur = 4 + Math.random() * 6;
+        const delay = Math.random() * 5;
+        p.style.cssText = `
+        width:${size}px; height:${size * 1.4}px;
+        left:${left}%;
+        animation-duration:${dur}s;
+        animation-delay:-${delay}s;
+      `;
+        petalContainer.appendChild(p);
+        setTimeout(() => p.remove(), (dur + delay) * 1000);
+      }
+      // Spawn 16 petals initially, then keep spawning
+      for (let i = 0; i < 16; i++) spawnPetal();
+      setInterval(spawnPetal, 600);
+
+      /* ── 3. Scroll-reveal (Intersection Observer) ────────── */
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15 },
+      );
+
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => observer.observe(el));
+
+      /* ── 4. Countdown timer ──────────────────────────────── */
+      // Update this date to your actual wedding date
+      const weddingDate = new Date("2026-06-20T11:00:00");
+
+      function updateCountdown() {
+        const now = new Date();
+        const diff = weddingDate - now;
+        if (diff <= 0) {
+          document.getElementById("cd-days").textContent = "0";
+          document.getElementById("cd-hours").textContent = "0";
+          document.getElementById("cd-mins").textContent = "0";
+          document.getElementById("cd-secs").textContent = "0";
+          return;
+        }
+        const days = Math.floor(diff / 864e5);
+        const hours = Math.floor((diff % 864e5) / 36e5);
+        const mins = Math.floor((diff % 36e5) / 6e4);
+        const secs = Math.floor((diff % 6e4) / 1e3);
+        document.getElementById("cd-days").textContent = String(days).padStart(
+          2,
+          "0",
+        );
+        document.getElementById("cd-hours").textContent = String(
+          hours,
+        ).padStart(2, "0");
+        document.getElementById("cd-mins").textContent = String(mins).padStart(
+          2,
+          "0",
+        );
+        document.getElementById("cd-secs").textContent = String(secs).padStart(
+          2,
+          "0",
+        );
+      }
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+
+      /* ── 5. Music toggle ─────────────────────────────────── */
+      const musicBtn = document.getElementById("music-btn");
+      const audio = document.getElementById("bg-music");
+
+      musicBtn.addEventListener("click", () => {
+        if (audio.paused) {
+          audio
+            .play()
+            .then(() => musicBtn.classList.add("playing"))
+            .catch(() => {});
+        } else {
+          audio.pause();
+          musicBtn.classList.remove("playing");
+        }
+      });
+
+      /* ── 7. Forever photo parallax ───────────────────────── */
+      const foreverPhotoEl = document.querySelector(".forever-photo");
+      const foreverImg = foreverPhotoEl
+        ? foreverPhotoEl.querySelector("img")
+        : null;
+      function updateParallax() {
+        if (!foreverImg) return;
+        const rect = foreverPhotoEl.getBoundingClientRect();
+        const progress =
+          (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+        const shift = (progress - 0.5) * 60;
+        foreverImg.style.transform = `translateY(${shift}px) scale(1.08)`;
+      }
+      window.addEventListener("scroll", updateParallax, { passive: true });
+      updateParallax();
+
+      /* ── 8. Gallery show more ────────────────────────────── */
+      const galleryMoreBtn = document.getElementById("gallery-more-btn");
+      const hiddenItems = document.querySelectorAll(".g-item--hidden");
+
+      galleryMoreBtn.addEventListener("click", () => {
+        const isExpanded = galleryMoreBtn.classList.toggle("expanded");
+        galleryMoreBtn.setAttribute("aria-expanded", isExpanded);
+        galleryMoreBtn.querySelector(".btn-text").textContent = isExpanded
+          ? "Thu gọn"
+          : "Xem thêm";
+
+        hiddenItems.forEach((item) => {
+          if (isExpanded) {
+            item.classList.remove("g-item--hidden");
+            // Trigger scroll-reveal for newly visible items
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => observer.observe(item));
+            });
+          } else {
+            item.classList.add("g-item--hidden");
+            item.classList.remove("visible");
+          }
+        });
+
+        if (!isExpanded) {
+          document
+            .getElementById("gallery")
+            .scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+
+      /* ── 9. Gallery lightbox ─────────────────────────────── */
+      const lb = document.createElement("div");
+      lb.id = "lightbox";
+      lb.innerHTML = `<button id="lightbox-close" aria-label="Đóng">&times;</button><img id="lightbox-img" src="" alt="" />`;
+      document.body.appendChild(lb);
+
+      const lbImg = document.getElementById("lightbox-img");
+      const lbClose = document.getElementById("lightbox-close");
+
+      function openLightbox(src, alt) {
+        lbImg.src = src;
+        lbImg.alt = alt;
+        lb.classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+      function closeLightbox() {
+        lb.classList.remove("active");
+        document.body.style.overflow = "";
+      }
+
+      document.querySelector(".gallery-grid").addEventListener("click", (e) => {
+        const img = e.target.closest(".g-item img");
+        if (img) openLightbox(img.src, img.alt);
+      });
+      lbClose.addEventListener("click", closeLightbox);
+      lb.addEventListener("click", (e) => {
+        if (e.target === lb) closeLightbox();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeLightbox();
+      });
+
+      /* ── 9. Gift modal ───────────────────────────────────── */
+      const giftModal = document.getElementById("gift-modal");
+      const giftBoxBtn = document.getElementById("gift-box-btn");
+      const giftModalClose = document.getElementById("gift-modal-close");
+
+      function openGiftModal() {
+        giftModal.classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+      function closeGiftModal() {
+        giftModal.classList.remove("active");
+        document.body.style.overflow = "";
+      }
+
+      giftBoxBtn.addEventListener("click", openGiftModal);
+      giftModalClose.addEventListener("click", closeGiftModal);
+      giftModal.addEventListener("click", (e) => {
+        if (e.target === giftModal) closeGiftModal();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeGiftModal();
+      });
+
+      /* ── 6. RSVP form ────────────────────────────────────── */
+      const SHEET_URL =
+        "https://script.google.com/macros/s/AKfycbxFMHKvaUeCW9uRzRShrdWvNXMuAMpE1wRBu3jUxembF4h73DnQTXMwfvXgT-1bbiUj/exec"; // ← paste your Apps Script web app URL here
+
+      const form = document.getElementById("rsvp-form");
+      const success = document.getElementById("rsvp-success");
+      const submitBtn = form.querySelector(".submit-btn");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const name = document.getElementById("guest-name").value.trim();
+        if (!name) {
+          document.getElementById("guest-name").focus();
+          document.getElementById("guest-name").style.borderColor = "#c0392b";
+          return;
+        }
+
+        const payload = {
+          name: name,
+          phone: document.getElementById("guest-phone").value.trim(),
+          guests: document.getElementById("guest-count").value,
+          attending: form.querySelector('input[name="attending"]:checked')
+            .value,
+          message: document.getElementById("guest-message").value.trim(),
+        };
+
+        // Disable button while submitting
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Đang gửi…";
+
+        try {
+          await fetch(SHEET_URL, {
+            method: "POST",
+            mode: "no-cors", // Apps Script requires no-cors
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+        } catch (_) {
+          // no-cors fetch resolves with opaque response — errors are silent
+        }
+
+        // Show success regardless (no-cors means we can't read the response)
+        document.getElementById("success-name").textContent = name;
+        document.querySelector(".rsvp-header").style.display = "none";
+        form.style.display = "none";
+        success.classList.add("visible");
+        success.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+
+      // Reset red border on input
+      document
+        .getElementById("guest-name")
+        .addEventListener("input", function () {
+          this.style.borderColor = "";
+        });
+    </script>
+  </body>
+</html>
